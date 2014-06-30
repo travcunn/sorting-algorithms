@@ -2,9 +2,18 @@ package sort
 
 import (
 	"math/rand"
-	"sort"
 	"testing"
 )
+
+func sorted(values []int) bool {
+	length := len(values)
+	for i := 0; i < length-1; i++ {
+		if values[i] > values[i+1] {
+			return false
+		}
+	}
+	return true
+}
 
 func generateList(length int) []int {
 	//Returns a slice of random integers.
@@ -17,13 +26,42 @@ func generateList(length int) []int {
 	return unsorted_list
 }
 
-func TestBogo(t *testing.T) {
-	list := generateList(10)
+func TestBogoSort(t *testing.T) {
+	list := generateList(6)
 
 	BogoSort(list)
 
-	sorted := sort.IsSorted(sort.IntSlice(list))
-	if !sorted {
+	if !sorted(list) {
+		t.Errorf("The values were not sorted properly.")
+	}
+}
+
+func TestBubbleSort(t *testing.T) {
+	list := generateList(1000)
+
+	BubbleSort(list)
+
+	if !sorted(list) {
+		t.Errorf("The values were not sorted properly.")
+	}
+}
+
+func TestInsertionSort(t *testing.T) {
+	list := generateList(1000)
+
+	InsertionSort(list)
+
+	if !sorted(list) {
+		t.Errorf("The values were not sorted properly.")
+	}
+}
+
+func TestMergeSort(t *testing.T) {
+	list := generateList(1000)
+
+	list = MergeSort(list)
+
+	if !sorted(list) {
 		t.Errorf("The values were not sorted properly.")
 	}
 }

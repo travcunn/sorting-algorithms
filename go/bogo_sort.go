@@ -1,14 +1,11 @@
 package sort
 
-import (
-	"math/rand"
-	"sort"
-)
+import "math/rand"
 
-func BogoSort(values []int) []int {
+func BogoSort(values []int) {
 	for {
-		if sort.IsSorted(sort.IntSlice(values)) {
-			return values
+		if sorted(values) {
+			break
 		}
 
 		// shuffle
